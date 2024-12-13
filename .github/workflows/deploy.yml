@@ -27,3 +27,8 @@ jobs:
         rsync -avz --delete \
           ./ \
           ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/your_site
+
+    - name: Restart Nginx
+      run: |
+        ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+        "sudo systemctl restart nginx"
